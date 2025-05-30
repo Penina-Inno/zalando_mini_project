@@ -47,6 +47,7 @@ This is **your system**. And it starts now. 🛠️
 > understood term that contrasts with complicated object frameworks.
 
 **Why it matters**: Products are the stars of your store. Get this right, and everything else becomes easier.
+
 ---
 
 ### 🔹 Milestone 2: Managing Inventory
