@@ -48,7 +48,11 @@ This is **your system**. And it starts now. 🛠️
 
 **Why it matters**: Products are the stars of your store. Get this right, and everything else becomes easier.
 
-💬 **Hint**: You get to decide what makes a product “complete” — if size options are flexible, how will your class adapt to that?
+💬 Hint :
+Since the recipe doesn't say how many units per potion...
+🎩 You decide!
+Try making it a method parameter — so the wizard can brew small or large batches.
+
 
 
 ---
