@@ -1,5 +1,6 @@
 package com.zalando.lite;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,6 +21,7 @@ import java.util.List;
  * - Data mutation (stock updates)
  */
 public class InventoryManager {
+}
 
     // Stores all products currently available in the inventory
     private List<Product> products;
@@ -31,7 +33,9 @@ public class InventoryManager {
      *
      * @param product the product to add to the inventory
      */
-    public void addProduct(Product product) { /* ... */ }
+    public void addProduct(Product product) {
+        products.add(product);
+    }
 
     /**
      * Finds a product using its ID.
@@ -41,7 +45,14 @@ public class InventoryManager {
      * @param id the ID of the product to find
      * @return the matching product, or null if not found
      */
-    public Product findProductById(int id) { /* ... */ }
+    public Product findProductById(int id) {
+        for (Product product : products) {
+            if (product.getId() == id) {
+                return product;
+            }
+        }
+        return null; // Not found
+    }
 
     /**
      * Lists all products in the inventory.
@@ -50,7 +61,9 @@ public class InventoryManager {
      *
      * @return list of all products
      */
-    public List<Product> listAllProducts() { /* ... */ }
+    public List<Product> listAllProducts() {
+        return new ArrayList<>(products);
+    }
 
     /**
      * Reduces the stock of a product after a purchase.
@@ -61,7 +74,14 @@ public class InventoryManager {
      * @param quantity amount to subtract
      * @return true if successful, false if insufficient stock or not found
      */
-    public boolean reduceStock(int productId, int quantity) { /* ... */ }
+    public boolean reduceStock(int productId, int quantity) {
+        Product product = findProductById(productId);
+        if (product != null && product.getStock() >= quantity) {
+            product.setStock(product.getStock() - quantity);
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Optional: Check if product exists and is in stock.
@@ -69,5 +89,15 @@ public class InventoryManager {
      * @param productId the ID to check
      * @return true if product exists and has stock
      */
-    public boolean isProductAvailable(int productId) { /* ... */ }
+    public boolean restockproduct(int productId, int quantity) {
+        Product product = findProductById(productId);
+        if (product != null) {
+            product.setStock(product.getStock() + quantity);
+            return true;
+        }
+        return false;
+    }
+}
+
+public void main() {
 }
