@@ -3,6 +3,7 @@ package com.zalando.lite;
 import java.util.List;
 import java.util.Map;
 
+
 /**
  * Handles the creation, validation, and storage of orders in the ZalandoLite system.
  *
@@ -27,6 +28,7 @@ public class OrderManager {
     // Used to update inventory after order placement
     private InventoryManager inventoryManager;
 
+
     /**
      * Creates a new order for the given customer and list of order items.
      *
@@ -36,15 +38,28 @@ public class OrderManager {
      * @param items a list of OrderItem entries to be purchased
      * @return the created Order, or null if validation fails
      */
-    public Order createOrder(Customer customer, List<OrderItem> items) { /* ... */ }
+    public Order createOrder(Customer customer, List<OrderItem> items) {
+        if (!validateStock(items)) {
+            System.out.println("Order failed: One or more items are out of stock.");
+            return null;
+        }
 
+        updateInventory(items);
+
+        Order order = new Order(nextOrderId++, customerId, LocalDateTime.now(), items);
+        customerOrders.computeIfAbsent(customerId, k -> new ArrayList<>()).add(order);
+        return order;
+    }
     /**
      * Retrieves all orders placed by a specific customer.
      *
      * @param customerId the ID of the customer
      * @return a list of their orders, or an empty list if none exist
      */
-    public List<Order> getOrdersForCustomer(int customerId) { /* ... */ }
+    public List<Order> getOrdersForCustomer(int customerId) {
+        return customerOrders.getOrDefault(customerId, new ArrayList<>());
+    }
+}
 
     /**
      * Optional helper: Validates item quantities before processing.
@@ -52,12 +67,31 @@ public class OrderManager {
      * @param items the list of items to validate
      * @return true if all items are in stock
      */
-    private boolean validateStock(List<OrderItem> items) { /* ... */ }
+    private boolean validateStock(List<OrderItem> items) {
+        for (OrderItem item : items) {
+            int productId = item.getProduct().getId();
+            int quantity = item.getQuantity();
+
+            if (!inventoryManager.isInStock(productId, quantity)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     /**
      * Optional helper: Updates inventory after successful order.
      *
      * @param items the list of items whose stock should be reduced
      */
-    private void updateInventory(List<OrderItem> items) { /* ... */ }
+    private void updateInventory(List<OrderItem> items) {
+        for (OrderItem item : items) {
+            inventoryManager.reduceStock(item.getProduct().getId(), item.getQuantity());
+        }
+}
+    public List<Order> getOrdersForCustomer(int customerId) {
+    return customerOrders.getOrDefault(customerId, new ArrayList<>());
+      }
+}
+public void main() {
 }
