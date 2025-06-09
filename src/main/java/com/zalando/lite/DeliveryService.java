@@ -32,7 +32,18 @@ public class DeliveryService {
      * @param order the order that needs to be delivered
      * @return the resulting Delivery object, or null if no couriers available
      */
-    public Delivery assignCourier(Order order) { /* ... */ }
+    public Delivery assignCourier(Order order) {
+        for (Courier courier : couriers) {
+            if (courier.isAvailable()) {
+                courier.toggleAvailability(); // now unavailable
+                Delivery delivery = new Delivery(order, courier);
+                deliveries.add(delivery);
+                return delivery;
+            }
+        }
+        System.out.println("No available couriers for order " + order.getOrderId());
+        return null;
+        }
 
     /**
      * Updates the status of an existing delivery.
@@ -42,7 +53,20 @@ public class DeliveryService {
      * @param delivery the delivery object to update
      * @param newStatus the new status string
      */
-    public void updateDeliveryStatus(Delivery delivery, String newStatus) { /* ... */ }
+    public void updateDeliveryStatus(Delivery delivery, String newStatus) {
+        delivery.setStatus(newStatus);
+        System.out.println("Updated delivery for order " + delivery.getOrder().getOrderId() + " to " + newStatus);
+
+        if (newStatus == DeliveryStatus.DELIVERED || newStatus == DeliveryStatus.FAILED) {
+            // Make courier available again
+            delivery.getCourier().setAvailable(true);
+        }
+    }
+
+    public List<Delivery> getAllDeliveries() {
+        return deliveries;
+    }
+}
 
     /**
      * Optional helper method to get all available couriers.
@@ -51,5 +75,11 @@ public class DeliveryService {
      *
      * @return a list of currently available couriers
      */
-    public List<Courier> getAvailableCouriers() { /* ... */ }
+    public List<Courier> getAvailableCouriers() {
+        return couriers;
+    }
+
+
+public void main() {
 }
+

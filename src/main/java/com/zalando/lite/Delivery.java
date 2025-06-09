@@ -33,30 +33,51 @@ public class Delivery {
      */
 
     // Returns the order associated with the delivery
-    public Order getOrder() { /* ... */ }
+    public Order getOrder() {
+        return order;
+    }
 
     // Sets the order associated with the delivery
-    public void setOrder(Order order) { /* ... */ }
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 
     // Returns the courier assigned to this delivery
-    public Courier getCourier() { /* ... */ }
+    public Courier getCourier() {
+        return courier;
+    }
 
     // Sets the courier assigned to this delivery
-    public void setCourier(Courier courier) { /* ... */ }
+    public void setCourier(Courier courier) {
+        this.courier = courier;
+    }
 
     // Returns the current status of the delivery
-    public String getStatus() { /* ... */ }
+    public String getStatus() {
+        return status;
+    }
 
     // Updates the status (should reflect progress or failure)
-    public void setStatus(String status) { /* ... */ }
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     // Returns the timestamp when the delivery was created
-    public LocalDateTime getTimestamp() { /* ... */ }
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
 
     /**
      * Provides a simple string representation of the delivery details.
      * Useful for debugging and logging to file.
      */
     @Override
-    public String toString() { /* ... */ }
+    public String toString() {
+        return "Delivery{" +
+                "orderId=" + order.getOrderId() +
+                ", courier=" + courier.getName() +
+                ", status=" + status +
+                ", timestamp=" + timestamp +
+                '}';
+    }
 }
