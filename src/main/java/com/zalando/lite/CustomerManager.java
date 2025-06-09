@@ -26,7 +26,14 @@ public class CustomerManager {
      *
      * @param customer the customer to add
      */
-    public void registerCustomer(Customer customer) { /* ... */ }
+    public void registerCustomer(Customer customer) {
+        if (customer == null || customerMap.containsKey(customer.getId())) {
+            System.out.println("Customer already exists or is null.");
+            return;
+        }
+        customerMap.put(customer.getId(), customer);
+
+    }
 
     /**
      * Retrieves a customer by their unique ID.
@@ -34,13 +41,22 @@ public class CustomerManager {
      * @param id the customer’s ID
      * @return the matching Customer, or null if not found
      */
-    public Customer getCustomerById(int id) { /* ... */ }
+    public Customer getCustomerById(int id) {
+        return customers.get(id);
 
+    }
+}
     /**
      * Optional: Returns all registered customers.
      * Can be used for listing or reporting.
      *
      * @return map of all customers
      */
-    public Map<Integer, Customer> getAllCustomers() { /* ... */ }
+    public Map<Integer, Customer> getAllCustomers() {
+        return new HashMap<>(customers);
+    }
 }
+
+public void main() {
+}
+
