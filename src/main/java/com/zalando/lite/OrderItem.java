@@ -8,7 +8,7 @@ package com.zalando.lite;
  * to break down orders into granular, trackable components.
  *
  * Concepts reinforced:
- * - Composition: combining two classes (Product + quantity)
+ * - Composition: combining two classes (Product and quantity)
  * - Data modeling: simple container object
  */
 public class OrderItem {
@@ -26,16 +26,24 @@ public class OrderItem {
      */
 
     // Returns the product associated with this item
-    public Product getProduct() { /* ... */ }
+    public Product getProduct() {
+        return product;
+    }
 
     // Sets the product for this item
-    public void setProduct(Product product) { /* ... */ }
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
     // Returns the quantity ordered
-    public int getQuantity() { /* ... */ }
+    public int getQuantity() {
+        return quantity;
+    }
 
     // Sets the quantity ordered
-    public void setQuantity(int quantity) { /* ... */ }
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
     /**
      * Calculates the subtotal (product price × quantity).
@@ -44,11 +52,20 @@ public class OrderItem {
      *
      * @return total cost of this line item
      */
-    public double getSubtotal() { /* ... */ }
+    public double getSubtotal() {
+        return product.getPrice() * quantity;
+    }
 
     /**
      * Returns a string summary of this order item.
      */
     @Override
-    public String toString() { /* ... */ }
+    public String toString() {
+        return "OrderItem{" +
+                "product=" + product.getName() +
+                ", quantity=" + quantity +
+                ", subtotal=" + getSubtotal() +
+                '}';
+    }
 }
+
