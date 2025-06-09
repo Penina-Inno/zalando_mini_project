@@ -41,28 +41,44 @@ public class Order {
      */
 
     // Returns the order ID
-    public int getOrderId() { /* ... */ }
+    public int getOrderId() {
+        return orderId;
+    }
 
     // Sets the order ID (may be used when generating orders manually)
-    public void setOrderId(int orderId) { /* ... */ }
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
 
     // Returns the customer who placed the order
-    public Customer getCustomer() { /* ... */ }
+    public Customer getCustomer() {
+        return customer;
+     }
 
     // Sets the customer for the order
-    public void setCustomer(Customer customer) { /* ... */ }
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
     // Returns the list of order items
-    public List<OrderItem> getItems() { /* ... */ }
+    public List<OrderItem> getItems() {
+        return items;
+     }
 
     // Sets the list of order items
-    public void setItems(List<OrderItem> items) { /* ... */ }
+    public void setItems(List<OrderItem> items) {
+        this.items = items;
+    }
 
     // Returns the timestamp of when the order was placed
-    public LocalDateTime getOrderDate() { /* ... */ }
+    public LocalDateTime getOrderDate() {
+        return timestamp;
+    }
 
     // Sets the order timestamp (usually auto-generated)
-    public void setOrderDate(LocalDateTime orderDate) { /* ... */ }
+    public void setOrderDate(LocalDateTime orderDate) {
+        this.timestamp = timestamp;
+    }
 
     /**
      * Calculates the total cost of the order by summing
@@ -70,12 +86,25 @@ public class Order {
      *
      * @return the total order cost
      */
-    public double calculateTotal() { /* ... */ }
+    public double calculateTotal() {
+        double total = 0.0;
+        for (OrderItem item : items) {
+            total += item.getSubtotal();
+        }
+        return total;
+    }
 
     /**
      * Returns a string summary of the order.
      * Useful for displaying in CLI or logs.
      */
     @Override
-    public String toString() { /* ... */ }
+    public String toString() {
+        return "Order{" +
+                "orderId=" + orderId +
+                ", customer=" + customer +
+                ", timestamp=" + timestamp +
+                ", items=" + items +
+                '}';
+    }
 }
