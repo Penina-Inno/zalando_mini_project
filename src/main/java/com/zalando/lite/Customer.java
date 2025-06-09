@@ -1,5 +1,7 @@
 package com.zalando.lite;
 
+import java.util.List;
+
 /**
  * Represents a customer in the ZalandoLite system.
  *
@@ -37,41 +39,78 @@ public class Customer {
      * Helps with registration and setup of test data.
      */
 
-    // Returns the customer's ID
-    public int getId() { /* ... */ }
+    public int Customer(int id, String name, String email, List<String> favoriteCategories, boolean isVip) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.favoriteCategories = favoriteCategories;
+        this.isVip = isVip;
+    }
+        // Returns the customer's ID
+        public int getId () {
+            return id;
+        }
 
-    // Sets the customer's ID
-    public void setId(int id) { /* ... */ }
+        // Sets the customer's ID
+        public void setId ( int id){
+            this.id = id;
+        }
+        // Returns the name of the customer
+        public String getName () {
+            return name;
+        }
 
-    // Returns the name of the customer
-    public String getName() { /* ... */ }
+        // Sets the customer's name
+        public void setName (String name){
+            this.name = name;
+        }
 
-    // Sets the customer's name
-    public void setName(String name) { /* ... */ }
+        // Returns the customer's email address
+        public String getEmail () {
+            return email;
+        }
 
-    // Returns the customer's email address
-    public String getEmail() { /* ... */ }
+        // Sets the customer's email
+        public void setEmail (String email){
+            this.email = email;
+        }
 
-    // Sets the customer's email
-    public void setEmail(String email) { /* ... */ }
-
-    // Returns whether the customer is a VIP
-    public boolean isVip() { /* ... */ }
-
+        // Returns whether the customer is a VIP
+        public boolean isVip () {
+            return isVip;
+        }
+    }
     // Sets VIP status (should match the @VIP field annotation logic)
-    public void setVip(boolean vip) { /* ... */ }
+    public void setVip(boolean vip) {
+        isVip = vip;
 
+    }
     // Returns the list of favorite categories
-    public List<String> getFavoriteCategories() { /* ... */ }
-
+    public List<String> getFavoriteCategories() {
+        return favoriteCategories;
+       }
     // Sets the list of favorite categories
-    public void setFavoriteCategories(List<String> categories) { /* ... */ }
+    public void setFavoriteCategories(List<String> categories) {
+        this.favoriteCategories = favoriteCategories;
+      }
 
     /**
      * Returns a printable summary of the customer's details.
      *
      * Useful for debugging, console menus, and reporting.
      */
+
     @Override
-    public String toString() { /* ... */ }
+    public String toString() {
+        return "customer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", favoriteCategories=" + favoriteCategories +
+                ", isVip=" + isVip +
+                '}';
+    }
+}
+
+public void main() {
 }
